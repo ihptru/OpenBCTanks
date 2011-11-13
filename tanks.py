@@ -1,6 +1,21 @@
 #!/usr/bin/python
 # coding=utf-8
 
+# Copyright 2011 OpenBCTanks Developers
+#
+# This file is part of OpenBCTanks, which is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import os, pygame, time, random, uuid, sys
 
 class myRect(pygame.Rect):
@@ -101,9 +116,9 @@ class Bonus():
         grenade : Picking up the grenade power up instantly wipes out ever enemy presently on the screen, including Armor Tanks regardless of how many times you've hit them. You do not, however, get credit for destroying them during the end-stage bonus points.
         helmet  : The helmet power up grants you a temporary force field that makes you invulnerable to enemy shots, just like the one you begin every stage with.
         shovel  : The shovel power up turns the walls around your fortress from brick to stone. This makes it impossible for the enemy to penetrate the wall and destroy your fortress, ending the game prematurely. The effect, however, is only temporary, and will wear off eventually.
-        star        : The star power up grants your tank with new offensive power each time you pick one up, up to three times. The first star allows you to fire your bullets as fast as the power tanks can. The second star allows you to fire up to two bullets on the screen at one time. And the third star allows your bullets to destroy the otherwise unbreakable steel walls. You carry this power with you to each new stage until you lose a life.
-        tank        : The tank power up grants you one extra life. The only other way to get an extra life is to score 20000 points.
-        timer       : The timer power up temporarily freezes time, allowing you to harmlessly approach every tank and destroy them until the time freeze wears off.
+        star    : The star power up grants your tank with new offensive power each time you pick one up, up to three times. The first star allows you to fire your bullets as fast as the power tanks can. The second star allows you to fire up to two bullets on the screen at one time. And the third star allows your bullets to destroy the otherwise unbreakable steel walls. You carry this power with you to each new stage until you lose a life.
+        tank    : The tank power up grants you one extra life. The only other way to get an extra life is to score 20000 points.
+        timer   : The timer power up temporarily freezes time, allowing you to harmlessly approach every tank and destroy them until the time freeze wears off.
     """
 
     # bonus types
@@ -1146,7 +1161,7 @@ class Player(Tank):
 
         # store how many bonuses in this stage this player has collected
         self.trophies = {
-            "bonus" : 0,
+            "bonus"  : 0,
             "enemy0" : 0,
             "enemy1" : 0,
             "enemy2" : 0,
