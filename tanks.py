@@ -371,6 +371,7 @@ class Explosion():
         else:
             self.active = False
 
+
 class Level():
 
     # tile constants
@@ -457,7 +458,6 @@ class Level():
         else:
             self.tile_water = self.tile_water1
 
-
     def loadLevel(self, level_nr = 1):
         """ Load specified level
         @return boolean Whether level was loaded
@@ -486,7 +486,6 @@ class Level():
             x = 0
             y += self.TILE_SIZE
         return True
-
 
     def draw(self, tiles = None):
         """ Draw specified map on top of existing surface """
@@ -547,6 +546,7 @@ class Level():
             self.mapr.append(myRect(pos[0], pos[1], self.TILE_SIZE, self.TILE_SIZE, tile))
 
         self.updateObstacleRects()
+
 
 class Tank():
 
@@ -643,7 +643,6 @@ class Tank():
         self.state = self.STATE_ALIVE
         gtimer.destroy(self.timer_uuid_spawn_end)
 
-
     def toggleSpawnImage(self):
         """ advance to the next spawn image """
         if self.state != self.STATE_SPAWNING:
@@ -664,7 +663,6 @@ class Tank():
             if self.shield_index >= len(self.shield_images):
                 self.shield_index = 0
             self.shield_image = self.shield_images[self.shield_index]
-
 
     def draw(self):
         """ draw tank """
@@ -773,7 +771,6 @@ class Tank():
         """ Round number to nearest divisible """
         return int(round(num / (base * 1.0)) * base)
 
-
     def bulletImpact(self, friendly_fire = False, damage = 100, tank = None):
         """ Bullet impact
         Return True if bullet should be destroyed on impact. Only enemy friendly-fire
@@ -817,6 +814,7 @@ class Tank():
             gtimer.destroy(self.timer_uuid_paralise)
             return
         self.paralised = paralised
+
 
 class Enemy(Tank):
 
@@ -1139,7 +1137,6 @@ class Enemy(Tank):
         return positions
 
 
-
 class Player(Tank):
 
     def __init__(self, level, type, position = None, direction = None, filename = None):
@@ -1272,7 +1269,6 @@ class Game():
 
         pygame.init()
 
-
         pygame.display.set_caption("Open Battle City Tanks")
 
         size = width, height = 480, 416
@@ -1322,8 +1318,8 @@ class Game():
         # pre-render game over text
         self.im_game_over = pygame.Surface((64, 40))
         self.im_game_over.set_colorkey((0,0,0))
-        self.im_game_over.blit(self.font.render("GAME", False, (127, 64, 64)), [0, 0])
-        self.im_game_over.blit(self.font.render("OVER", False, (127, 64, 64)), [0, 20])
+        self.im_game_over.blit(self.font.render("GAME", False, (255, 0, 0)), [0, 0])
+        self.im_game_over.blit(self.font.render("OVER", False, (255, 0, 0)), [0, 20])
         self.game_over_y = 416+40
 
         # number of players. here is defined preselected menu value
@@ -1333,7 +1329,6 @@ class Game():
         del bullets[:]
         del enemies[:]
         del bonuses[:]
-
 
     def triggerBonus(self, bonus, player):
         """ Execute bonus powers """
@@ -1382,7 +1377,6 @@ class Game():
         if shield and duration != None:
             gtimer.add(duration, lambda :self.shieldPlayer(player, False), 1)
 
-
     def spawnEnemy(self):
         """ Spawn new enemy if needed
         Only add enemy if:
@@ -1400,7 +1394,6 @@ class Game():
         enemy = Enemy(self.level, 1)
 
         enemies.append(enemy)
-
 
     def respawnPlayer(self, player, clear_scores = False):
         """ Respawn player """
@@ -1664,7 +1657,6 @@ class Game():
         else:
             self.nextLevel()
 
-
     def draw(self):
         global screen, castle, players, enemies, bullets, bonuses
 
@@ -1736,7 +1728,6 @@ class Game():
             screen.blit(self.flag_image, [x+17, y+280])
             screen.blit(self.font.render(str(self.stage), False, text_color), [x+17, y+312])
 
-
     def drawIntroScreen(self, put_on_surface = True):
         """ Draw intro (menu) screen
         @param boolean put_on_surface If True, flip display after drawing
@@ -1799,7 +1790,6 @@ class Game():
 
         screen.blit(screen_cp, [0, 0])
         pygame.display.flip()
-
 
     def chunks(self, l, n):
         """ Split text string in chunks of specified size
@@ -1881,7 +1871,6 @@ class Game():
         for enemy in enemies:
             enemy.paused = freeze
         self.timefreeze = freeze
-
 
     def loadHiscore(self):
         """ Load hiscore
