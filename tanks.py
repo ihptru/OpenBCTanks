@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# coding=utf-8
+# -*- coding: utf-8 -*-
 
 # Copyright 2011 OpenBCTanks Developers
 #
@@ -462,7 +462,7 @@ class Level():
         """ Load specified level
         @return boolean Whether level was loaded
         """
-        filename = "levels/"+str(level_nr)
+        filename = "maps/"+str(level_nr)
         if (not os.path.isfile(filename)):
             return False
         level = []
@@ -1281,9 +1281,9 @@ class Game():
         self.clock = pygame.time.Clock()
 
         # load sprites (funky version)
-        #sprites = pygame.transform.scale2x(pygame.image.load("images/sprites.gif"))
+        #sprites = pygame.transform.scale2x(pygame.image.load("textures/sprites.gif"))
         # load sprites (pixely version)
-        sprites = pygame.transform.scale(pygame.image.load("images/sprites.gif"), [192, 224])
+        sprites = pygame.transform.scale(pygame.image.load("textures/sprites.gif"), [192, 224])
         #screen.set_colorkey((0,138,104))
 
         pygame.display.set_icon(sprites.subsurface(0, 0, 13*2, 13*2))
@@ -1313,7 +1313,7 @@ class Game():
         self.timefreeze = False
 
         # load custom font
-        self.font = pygame.font.Font("fonts/prstart.ttf", 16)
+        self.font = pygame.font.Font("textures/prstart.ttf", 16)
 
         # pre-render game over text
         self.im_game_over = pygame.Surface((64, 40))
@@ -2055,13 +2055,18 @@ class Game():
                         if player.bonus != None and player.side == player.SIDE_PLAYER:
                             self.triggerBonus(bonus, player)
                             player.bonus = None
-                    elif player.state == player.STATE_DEAD:
+                    elif player.state == player.STATE_DEAD and player.lives>-1:
                         self.superpowers = 0
                         player.lives -= 1
                         if player.lives > 0:
                             self.respawnPlayer(player)
                         else:
-                            self.gameOver()
+                            if_game_over = True
+                            for player in players:
+                                if player.lives>0:
+                                    if_game_over = False
+                            if if_game_over:
+                                self.gameOver()
 
             for bullet in bullets:
                 if bullet.state == bullet.STATE_REMOVED:
